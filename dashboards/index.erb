@@ -1,0 +1,22 @@
+<% content_for :title do %>Brunch City Bathroom<% end %>
+<div class="gridster">
+  <ul>
+    <!--li data-row="1" data-col="1" data-sizex="3" data-sizey="1">
+      <div class='widget-weather widget' data-view='Weather' style='background-color:white'>
+        <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=<% ENV['FORECAST_LAT'] %>&lon=<% ENV['FORECAST_LONG'] %>&name=Brunch City"> </iframe>
+      </div>
+    </li-->
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="Clock"></div>
+    </li>
+    <li data-row="1" data-col="2" data-sizex="3" data-sizey="1">
+      <div data-id="verbinski" data-view="Verbinski"></div>
+    </li>
+    <!--li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
+      <div data-id="trafficmap" data-view="Trafficmap" data-title="Kansas City Traffic" data-lat="<% ENV['FORECAST_LAT'] %>" data-long="<% ENV['FORECAST_LONG'] %>" data-zoom="15" ></div>
+    </li-->
+    <li data-row="2" data-col="1" data-sizex="4" data-sizey="1">
+      <div data-id='plex' data-view="Plex"></div>
+    </li>
+  </ul>
+</div>

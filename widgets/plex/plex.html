@@ -1,0 +1,10 @@
+<h1 class="title" data-bind="title"></h1>
+
+<ul class="list-nostyle">
+  <li class='new-vid' data-foreach-vid="vids">
+    <img data-bind-src="vid.filename | prepend '/assets/thumbs/'" />
+  </li>
+</ul>
+
+<!--p class="more-info" data-bind="moreinfo"></p>
+<p class="updated-at" data-bind="updatedAtMessage"></p-->
