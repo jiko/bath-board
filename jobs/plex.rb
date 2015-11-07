@@ -25,11 +25,11 @@ SCHEDULER.every '5m', :first_in => 5 do |job|
 
   recent = Array.new
   server.library.sections.each do |section|
-    section.recently_added.take(10).each do |video|
+    section.recently_added.take(50).each do |video|
       v = Hash.new
       if section.type == 'show'
         v['title'] = video.grandparent_title
-        v['thumb'] = video.grandparent_thumb
+        v['thumb'] = video.parent_thumb
       elsif section.type == 'movie'
         v['title'] = video.title
         v['thumb'] = video.thumb
@@ -44,13 +44,23 @@ SCHEDULER.every '5m', :first_in => 5 do |job|
     not r['viewed']
   end
 
-  recent.sort! do |x,y|
+  uniques = Array.new
+  uniq = recent.delete_if do |video|
+    in_list = false
+    if uniques.include? video['title']
+      in_list = true
+    else
+      uniques << video['title']
+    end
+    in_list
+  end
+
+  uniq.sort! do |x,y|
     x['added_at'] <=> y['added_at']
   end
 
-  display = recent.reverse.take(5)
+  display = uniq.reverse.take(5)
 
-  # filenames = Array.new
   # check if image exists in images folder
   # if not download it
   display.each do |disp|
