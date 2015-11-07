@@ -1,13 +1,26 @@
 require 'plex-ruby'
 require 'open-uri'
 
+module Plex
+  def self.open(url)
+    headers = {}
+    headers["X-Plex-Client-Identifier"] = ENV['PLEX_CLIENT_ID']
+    headers['X-Plex-Token'] = ENV['PLEX_TOKEN']
+    headers['X-Plex-Username'] = ENV['PLEX_USER']
+
+    super(url, headers)
+  end
+end
+
+headers = {}
+headers["X-Plex-Client-Identifier"] = ENV['PLEX_CLIENT_ID']
+headers['X-Plex-Token'] = ENV['PLEX_TOKEN']
+headers['X-Plex-Username'] = ENV['PLEX_USER']
+
 host = ENV['PLEX_HOST']
 port = ENV['PLEX_PORT']
 
 SCHEDULER.every '5m', :first_in => 5 do |job|
-  Plex.configure do |config|
-    config.auth_token = ENV['PLEX_AUTH_TOKEN']
-  end
   server = Plex::Server.new(host, port)
 
   recent = Array.new
@@ -48,7 +61,7 @@ SCHEDULER.every '5m', :first_in => 5 do |job|
     filepath = File.expand_path("../..", __FILE__) + '/assets/images/thumbs/' + filename
     if not File.exist? filepath
       uri = 'http://' + ENV['PLEX_HOST'] + ':' + ENV['PLEX_PORT'] + disp['thumb']
-      open(uri) do |thumb|
+      open(uri, headers) do |thumb|
         File.open(filepath, 'wb') do |file|
           file.puts thumb.read
         end
