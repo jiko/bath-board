@@ -29,7 +29,7 @@ SCHEDULER.every '5m', :first_in => 5 do |job|
       v = Hash.new
       if section.type == 'show'
         v['title'] = video.grandparent_title
-        v['thumb'] = video.parent_thumb
+        v['thumb'] = video.grandparent_thumb
       elsif section.type == 'movie'
         v['title'] = video.title
         v['thumb'] = video.thumb
