@@ -11,7 +11,6 @@ class Dashing.Verbinski extends Dashing.Widget
 
   onData: (data) ->
     # Handle incoming data
-    $(@node).addClass(@getBackground(@get('current.temperature')))
     @currentBg(@get('current.temperature'))
     @getWindDirection(@get('current.wind_bearing'))
     @todayBg(@get('today.high'), @get('today.low'))
@@ -32,6 +31,7 @@ class Dashing.Verbinski extends Dashing.Widget
     averageRaw = (high + low) / 2
     average = Math.round(averageRaw)
     @set 'today_bg', @getBackground(average)
+    $(@node).addClass(@getBackground(average))
 
   thisWeekBg: (weekRange) ->
     averages = []
