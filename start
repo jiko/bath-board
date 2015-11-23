@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
+source ~/.nvm/nvm.sh
+nvm use stable
+
 source .env
 dashing start
